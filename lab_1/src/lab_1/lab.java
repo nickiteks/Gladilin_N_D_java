@@ -22,9 +22,11 @@ public class lab {
 
 	final Random random = new Random();
 
-	private int _startPosX=random.nextInt(50);;
+	private int _startPosX=random.nextInt(50);
 
-	private int _startPosY=random.nextInt(50);;
+	private int _startPosY=random.nextInt(50);
+	
+	private int guns=random.nextInt(4)+1;
 
 	private int _pictureWidth=827;
 
@@ -73,7 +75,7 @@ public class lab {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
-		JPanel panel = new tankPanel(_startPosX,_startPosY);
+		JPanel panel = new tankPanel(_startPosX,_startPosY,guns);
 		panel.setBounds(30, 45, 827, 339);
 		frame.getContentPane().add(panel);
 
@@ -142,11 +144,8 @@ public class lab {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				_startPosX=random.nextInt(50);
-				_startPosY=random.nextInt(50);
-				tankPanel.x=_startPosX;
-				tankPanel.y=_startPosY;
-
+				tankPanel.x=random.nextInt(50);
+				tankPanel.y=random.nextInt(50);
 				panel.repaint();				
 			}
 		});

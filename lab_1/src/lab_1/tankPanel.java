@@ -11,17 +11,17 @@ public class tankPanel extends javax.swing.JPanel {
 
 	static int x;
 	static int y;
-
+	int guns;// 3 parametr
 	Color MainColor= new Color(141, 182, 0); 
 
 	Color DopColor=new Color(253, 233, 16);   
 
 
-	public tankPanel(int positionX,int poitionY) 
+	public tankPanel(int positionX,int poitionY,int _guns) 
 	{
 		x=positionX;
 		y=poitionY;
-
+		guns=_guns;
 
 	}
 
@@ -29,15 +29,14 @@ public class tankPanel extends javax.swing.JPanel {
 	public void paint(Graphics g) 
 	{	
 		super.paint(g);
-		final Random random = new Random();
 
-		DrawTank(g,x,y,true,false,false);
+		DrawTank(g,x,y,true,false,false,3);
 	}
 
 
-	public  void DrawTank(Graphics g, int _startPosX, int _startPosY ,boolean firstGun , boolean secondGun , boolean thirdGun)
+	public  void DrawTank(Graphics g, int _startPosX, int _startPosY ,boolean firstGun , boolean secondGun , boolean thirdGun,int _guns)
 	{
-
+		int size=5;
 		if (firstGun)
 		{
 			g.setColor(DopColor);
@@ -63,6 +62,21 @@ public class tankPanel extends javax.swing.JPanel {
 		g.fillRect( _startPosX - 35, _startPosY + 32, 80, 6);
 		g.drawRect( _startPosX - 35, _startPosY + 32, 80, 6);
 		}
+		
+		for(int i=1;i<=_guns;i++) 
+		{
+		
+		g.setColor(DopColor);
+		
+		g.drawRect( _startPosX + 5, _startPosY + size, 85, 5);
+		
+		g.fillRect( _startPosX + 5, _startPosY + size, 85, 5);
+		
+		
+		size+=9;
+		
+		}
+		
 		g.setColor(MainColor);
 		g.drawRect(_startPosX + 10, _startPosY - 5, 20, 10);
 		g.fillRect( _startPosX + 10, _startPosY - 5, 20, 10);
