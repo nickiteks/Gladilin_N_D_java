@@ -20,29 +20,8 @@ public class lab {
 
 	private JFrame frame;
 
-	final Random random = new Random();
-
-	private int _startPosX=random.nextInt(50);
-
-	private int _startPosY=random.nextInt(50);
-	
-	private int guns=random.nextInt(4)+1;
-
-	private int _pictureWidth=827;
-
-	private int _pictureHeight=339;
-
-	private static int tankWidth = 80;
-
-	private static int tankHeight = 80;
-
-	public int MaxSpeed=random.nextInt(20)+100;
-
-	public float Weight=random.nextInt(1000)+1000;
-
-
-
-
+	final Random rnd = new Random();
+	 tank tank;
 	/**
 	 * Launch the application.
 	 */
@@ -75,21 +54,19 @@ public class lab {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
-		JPanel panel = new tankPanel(_startPosX,_startPosY,guns);
+		tankPanel panel = new tankPanel(tank);
 		panel.setBounds(30, 45, 827, 339);
 		frame.getContentPane().add(panel);
 
-		float step = MaxSpeed * 100 / Weight;
+		
 
 		JButton buttomUp = new JButton("");
 		buttomUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (tankPanel.y - step > 0)
-				{
-					tankPanel.y -= step;
-					panel.repaint();
-				}
-
+				
+				tank.moveTank(Direction.Up);
+				panel.setTank(tank);
+				panel.repaint();
 			}
 		});
 		buttomUp.setBounds(721, 406, 20, 20);
@@ -98,13 +75,11 @@ public class lab {
 		JButton ButtonRight = new JButton("");
 		ButtonRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				if (tankPanel.x + step < _pictureWidth - tankWidth)
-				{
-					tankPanel.x += step;
-					panel.repaint();
-				}
+				tank.moveTank(Direction.Right);
+				panel.setTank(tank);
+				panel.repaint();
 			}
+			
 		});
 		ButtonRight.setBounds(743, 427, 20, 20);
 		frame.getContentPane().add(ButtonRight);
@@ -112,13 +87,11 @@ public class lab {
 		JButton buttonLeft = new JButton("");
 		buttonLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				if (tankPanel.x - step > 30)
-				{
-
-					tankPanel.x -= step;
-					panel.repaint();
-				}
+				tank.moveTank(Direction.Left);
+				panel.setTank(tank);
+				panel.repaint();
+				
+				
 			}
 		});
 		buttonLeft.setBounds(698, 427, 20, 20);
@@ -127,12 +100,10 @@ public class lab {
 		JButton buttonDown = new JButton("");
 		buttonDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				tank.moveTank(Direction.Down);
+				panel.setTank(tank);
+				panel.repaint();
 
-				if (tankPanel.y + step < _pictureHeight - tankHeight)
-				{
-					tankPanel.y += step;
-					panel.repaint();
-				}
 			}
 		});
 		buttonDown.setBounds(721, 427, 20, 20);
@@ -143,14 +114,17 @@ public class lab {
 		JButton button = new JButton("\u0441\u043E\u0437\u0434\u0430\u0442\u044C");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				tankPanel.x=random.nextInt(50);
-				tankPanel.y=random.nextInt(50);
+								
+				tank.SetPosition(rnd.nextInt(50), rnd.nextInt(50), 827, 339);
+				panel.setTank(tank);
 				panel.repaint();				
 			}
 		});
 		button.setBounds(420, 11, 89, 23);
 		frame.getContentPane().add(button);
+		
+		tank=new tank(rnd.nextInt(20)+100,guns.superGun, rnd.nextInt(1000)+1000, Color.green,
+		        Color.yellow, false, false, false);
 
 
 	}
