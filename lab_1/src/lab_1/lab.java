@@ -21,7 +21,9 @@ public class lab {
 	private JFrame frame;
 
 	final Random rnd = new Random();
-	 tank tank;
+	 tank tank=new tank(rnd.nextInt(20)+100,guns.powerGun, rnd.nextInt(1000)+1000, Color.green,
+		        Color.yellow, false, false, false);
+;
 	/**
 	 * Launch the application.
 	 */
@@ -115,6 +117,7 @@ public class lab {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 								
+				
 				tank.SetPosition(rnd.nextInt(50), rnd.nextInt(50), 827, 339);
 				panel.setTank(tank);
 				panel.repaint();				
@@ -123,9 +126,7 @@ public class lab {
 		button.setBounds(420, 11, 89, 23);
 		frame.getContentPane().add(button);
 		
-		tank=new tank(rnd.nextInt(20)+100,guns.superGun, rnd.nextInt(1000)+1000, Color.green,
-		        Color.yellow, false, false, false);
-
+		
 
 	}
 }
