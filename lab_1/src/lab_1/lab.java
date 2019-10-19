@@ -17,6 +17,7 @@ import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
 
 public class lab {
+	
 
 	private JFrame frame;
 
