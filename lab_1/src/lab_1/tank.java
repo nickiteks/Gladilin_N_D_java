@@ -102,7 +102,7 @@ public class tank extends WarCar  {
 	
 		g.setColor(Color.black);//// рамки///
 		g.drawRect(_startPosX + 10, _startPosY + 10, 25, 10);
-		g.drawRect( 0, 0, 826, 338);
+		//g.drawRect( 0, 0, 826, 338);
 		super.DrawTransport(g);
 	}
 

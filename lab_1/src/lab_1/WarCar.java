@@ -46,7 +46,7 @@ public class WarCar extends Vehicle {
 					_startPosY += step;
 				}
 				break;
-
+				
 			}
 		}
 	  public void DrawTransport(Graphics g)
@@ -66,7 +66,7 @@ public class WarCar extends Vehicle {
           g.fillOval(_startPosX + 55, _startPosY + 70, 40, 40);
           
           g.setColor(Color.black);//// рамки///
-  		  g.drawRect( 0, 0, 826, 338);
+  		 // g.drawRect( 0, 0, 826, 338);
   			
       }
 	  

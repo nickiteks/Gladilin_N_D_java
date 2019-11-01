@@ -30,6 +30,7 @@ public class lab {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			
 			public void run() {
 				try {
 					lab window = new lab();
@@ -64,7 +65,6 @@ public class lab {
 		panel.setBounds(30, 45, 827, 339);
 		frame.getContentPane().add(panel);
 
-		
 
 		JButton buttomUp = new JButton("");
 		buttomUp.addActionListener(new ActionListener() {
@@ -114,8 +114,7 @@ public class lab {
 		});
 		buttonDown.setBounds(721, 427, 20, 20);
 		frame.getContentPane().add(buttonDown);
-
-
+		
 
 		JButton btnDop = new JButton("Dop");
 		btnDop.addActionListener(new ActionListener() {
