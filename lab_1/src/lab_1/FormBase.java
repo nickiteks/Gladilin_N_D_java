@@ -16,10 +16,11 @@ import javax.swing.JTextField;
 public class FormBase {
 
 	private JFrame frame;
-	
+	private WarBasePanel pictureBoxBig;
 	Random rnd = new Random();
 	private JTextField textField;
 	ITransport transport=null;
+	
 	
 
 	/**
@@ -51,24 +52,27 @@ public class FormBase {
 	
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1000, 600);
+		frame.setBounds(100, 100, 988, 776);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		WarBase<ITransport, IGuns> base= new WarBase<ITransport ,IGuns>(20, 663, 440);
 		
-		JPanel panel = new WarBasePanel(base);
-		panel.setBounds(22, 21, 699, 422);
-		frame.getContentPane().add(panel);
+		pictureBoxBig = new WarBasePanel(base);
+		pictureBoxBig.setBounds(22, 21, 719, 705);
+		frame.getContentPane().add(pictureBoxBig);
 		
 		JButton button = new JButton("\u043C\u0430\u0448\u0438\u043D\u0430");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				
-				Color mainColor = JColorChooser.showDialog(panel, "chose", Color.BLACK);
-				transport = new WarCar(rnd.nextInt(20)+100, rnd.nextInt(1000)+1000, mainColor);
+			   Color mainColor = JColorChooser.showDialog(pictureBoxBig, "chose", Color.BLACK);
+				transport = new WarCar(rnd.nextInt(20)+100, rnd.nextInt(1000)+1000, mainColor);		
+				 base.clone(mainColor, null, 0);
 				base.add(transport);
+				
+				
 				
 							
 			}
@@ -80,15 +84,12 @@ public class FormBase {
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Color mainColor = JColorChooser.showDialog(panel, "chose", Color.BLACK);
-				Color DopColor = JColorChooser.showDialog(panel, "chose", Color.BLACK);
+				Color mainColor = JColorChooser.showDialog(pictureBoxBig, "chose", Color.BLACK);
+				Color DopColor = JColorChooser.showDialog(pictureBoxBig, "chose", Color.BLACK);
 				
-				
-			
-				
-				
-				
-				
+				 base.clone(mainColor, DopColor, 1);
+				 
+				 
 				transport = new tank(rnd.nextInt(20)+100,
 						guns.superGun, 
 						rnd.nextInt(1000)+1000, 
@@ -97,6 +98,8 @@ public class FormBase {
 				        false, 
 				        false, 
 				        false);
+				
+				
 				
 	guns _guns = guns.superGun;
 								
@@ -154,6 +157,40 @@ public class FormBase {
 		textField.setBounds(847, 296, 96, 20);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
+		
+		JButton Button_multy = new JButton("\u0443\u043C\u043D\u043E\u0436\u0435\u043D\u0438\u0435");
+		Button_multy.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			
+			
+				
+	
+		base.mylty(2);
+		pictureBoxBig.repaint();
+		
+		
+		
+		
+		
+				
+			}
+		});
+		Button_multy.setBounds(829, 157, 126, 40);
+		frame.getContentPane().add(Button_multy);
+		
+		JButton Button_Del = new JButton("\u0434\u0435\u043B\u0435\u043D\u0438\u0435");
+		Button_Del.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+				base.del(2);
+				pictureBoxBig.repaint();
+			}
+		});
+		Button_Del.setBounds(829, 205, 126, 40);
+		frame.getContentPane().add(Button_Del);
 		
 		
 	}

@@ -16,7 +16,7 @@ public class WarBasePanel extends JPanel {
 		this.base = base;
 	}
 
-	@Override
+	
 	public void paint(Graphics g) 
 	{
 		super.paint(g);

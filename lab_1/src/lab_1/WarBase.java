@@ -2,6 +2,7 @@ package lab_1;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.Random;
 
 public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 	
@@ -18,6 +19,13 @@ public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 	    private final int _placeSizeWidth = 270;
 
 	    private final int _placeSizeHeight = 135;
+	    
+	    int type;
+	    
+	    private  Color mainColor;
+	    
+	    private  Color dopColor;
+	    
 	
 	    public WarBase(int sizes, int pictureWidth, int pictureHeight)
 	    {
@@ -27,22 +35,30 @@ public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 	    	PictureWidth = pictureWidth;	    	
 	    	 PictureHeight = pictureHeight;
 	    	
-	    	 for (int i = 0; i < _places.length; i++)
-	         {
-	             _places[i] = null;
-	         }
+	    	 
+	    		    
+	    }
+	    
+	    public void clone(Color mainColor ,Color dopColor,int type)
+	    {
+	    	
+	    	
+	    	 this.mainColor =mainColor;
+	    	 this.dopColor= dopColor;
+	    	 this.type=type;
+	    	 
 	    		    
 	    }
 	
 	    
 	    
-	    public int add (T transport)
+	    public int add (ITransport transport)
 	    {
 	        for (int i = 0; i < this._places.length; i++)
 	        {
 	            if (this.CheckFreePlace(i))
 	            {
-	            	this._places[i] = transport;
+	            	this._places[i] = (T) transport;
 	                this._places[i].SetPosition(30 + i / 5 * _placeSizeWidth + 5,
 	                                             i % 5 * _placeSizeHeight + 15,
 	                                             this.PictureWidth,
@@ -60,7 +76,7 @@ public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 	        {
 	            if (this.CheckFreePlace(i))
 	            {
-	            	this._places[i] = transport;
+	            	this._places[i] =  transport;
 	            	this._places[i].SetPosition(30 + i / 5 * _placeSizeWidth + 5,
 	                                             i % 5 * _placeSizeHeight + 15,
 	                                             this.PictureWidth,
@@ -76,7 +92,7 @@ public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 	    
 	    
 	    
-	    public T sub(int index)
+	    public T sub (int index)
 	    {
 	        if (index < 0 || index > this._places.length)
 	        {
@@ -95,10 +111,103 @@ public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 	    }
 	    
 	    
+	    
+	    public  int   mylty(int num) 
+	    {
+	    	Random rnd = new Random();
+	    	
+	    	 int score=0;
+	    	 int k = -1;
+	    
+	    	for (int i = 0; i < this._places.length; i++)
+	        {
+	            if (!this.CheckFreePlace(i))
+	            {
+	            	score++;
+	            }
+	        }
+	    	
+	    	num = (num*score)-score;
+	    	
+	    	for (int j = 0; j < num; j++) 
+	    	{
+	    				    	
+		    	ITransport _transport =null;
+		    	
+		    	if(type==0) 
+		    	{
+		    		
+		    		_transport = new WarCar(rnd.nextInt(20)+100, rnd.nextInt(1000)+1000, mainColor);
+		    		
+		    			    		
+		    	}
+		    			    	
+		    	if(type==1) 
+		    	{
+		    		
+		    		_transport = new tank(rnd.nextInt(20)+100,
+							guns.superGun, 
+							rnd.nextInt(1000)+1000, 
+							mainColor,
+							dopColor,
+					        false, 
+					        false, 
+					        false);	
+		    			    		
+		    	}
+	    		
+	    		
+	    			
+	    		
+				add(_transport);
+	    		
+	    			
+	         }
+	    	
+	    	
+	    	return k;
+	    		 
+		}
+	    
+	    
+	    public  void   del (int num) 
+	    {
+	    	
+	    	 int score=0;
+	    	 
+	    
+	    	for (int i = 0; i < this._places.length; i++)
+	        {
+	            if (!this.CheckFreePlace(i))
+	            {
+	            	score++;
+	            }
+	        }
+	    		num = (score/num)-1;
+	    	
+	    	for (int i = _places.length-1; i > num; i--) 
+	    	{
+	    		 if(_places[i]!=null)
+		          _places[i] = null;
+
+		         
+		            
+		     }
+	    					
+	     }
+	    	
+	    	
+	   
+	    	
+    
+	    
+	    
 	    private boolean CheckFreePlace(int index)
 	    {
 	        return _places[index] == null;
 	    }
+	    
+	    
 	    
 	    public void Draw(Graphics g)
 	    {
@@ -117,7 +226,8 @@ public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 	    private void DrawMarking(Graphics g)
 	    {
 	        g.setColor(Color.BLACK);
-	        g.drawRect(0, 0, (_places.length / 5) * _placeSizeWidth, 600);
+	       
+	        g.drawRect(0, 0, (_places.length / 5) * _placeSizeWidth, 700);
 	        for (int i = 0; i < _places.length / 5; i++)
 	        {
 	            for (int j = 0; j < 6; ++j)
@@ -125,8 +235,15 @@ public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 	                g.drawLine(i * _placeSizeWidth, j * _placeSizeHeight-7,
 	                i * _placeSizeWidth + 110, j * _placeSizeHeight-7);
 	            }
-	            g.drawLine(i * _placeSizeWidth, 0, i * _placeSizeWidth, 400);
+	            g.drawLine(i * _placeSizeWidth, 0, i * _placeSizeWidth, 700);
 	        }
 	    }
-
+	    
+	    
+	    
+	   
+		
 }
+	    
+
+
