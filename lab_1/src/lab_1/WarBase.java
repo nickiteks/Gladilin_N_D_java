@@ -2,6 +2,9 @@ package lab_1;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.Dictionary;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
@@ -13,7 +16,9 @@ public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 	    private int PictureWidth;
 
 	    private int PictureHeight;
-	
+	    
+	    private int _maxCount;
+	    
 	    
 	    
 	    private final int _placeSizeWidth = 270;
@@ -32,6 +37,7 @@ public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 	    	
 	    	_places = (T[]) new Object[sizes];
 	    	gunsForm = (W[]) new Object[sizes];
+	    	_maxCount = sizes;
 	    	PictureWidth = pictureWidth;	    	
 	    	 PictureHeight = pictureHeight;
 	    	
@@ -54,6 +60,12 @@ public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 	    
 	    public int add (ITransport transport)
 	    {
+	    	if (_places.length == _maxCount)
+            {
+                return -1;
+            }
+	    	
+	    	
 	        for (int i = 0; i < this._places.length; i++)
 	        {
 	            if (this.CheckFreePlace(i))
@@ -72,6 +84,11 @@ public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 	    
 	    public int add(T transport, W gunsForm)
 	    {
+	    	if (_places.length == _maxCount)
+            {
+                return -1;
+            }
+	    	
 	        for (int i = 0; i < this._places.length; i++)
 	        {
 	            if (this.CheckFreePlace(i))
