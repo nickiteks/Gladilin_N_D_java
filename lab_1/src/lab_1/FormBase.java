@@ -9,6 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JColorChooser;
 
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
@@ -20,6 +22,8 @@ public class FormBase {
 	Random rnd = new Random();
 	private JTextField textField;
 	ITransport transport=null;
+	
+	
 	
 	
 

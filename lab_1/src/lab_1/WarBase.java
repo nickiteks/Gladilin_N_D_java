@@ -2,17 +2,21 @@ package lab_1;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 	
-		private T[] _places;
+		//private T[] _places;
 		
 		private W[] gunsForm;
 	
 	    private int PictureWidth;
 
 	    private int PictureHeight;
+	    
+	    Map<Integer , T> _places = new HashMap< Integer , T>();
 	
 	    
 	    
@@ -30,7 +34,7 @@ public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 	    public WarBase(int sizes, int pictureWidth, int pictureHeight)
 	    {
 	    	
-	    	_places = (T[]) new Object[sizes];
+	    	_places = new HashMap<Integer, T>();
 	    	gunsForm = (W[]) new Object[sizes];
 	    	PictureWidth = pictureWidth;	    	
 	    	 PictureHeight = pictureHeight;
@@ -52,14 +56,14 @@ public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 	
 	    
 	    
-	    public int add (ITransport transport)
+	    public int add (T _transport)
 	    {
-	        for (int i = 0; i < this._places.length; i++)
+	        for (int i = 0; i < this._places.size(); i++)
 	        {
 	            if (this.CheckFreePlace(i))
 	            {
-	            	this._places[i] = (T) transport;
-	                this._places[i].SetPosition(30 + i / 5 * _placeSizeWidth + 5,
+	            	_places.put(i, _transport);
+	                _places.get(i).SetPosition(30 + i / 5 * _placeSizeWidth + 5,
 	                                             i % 5 * _placeSizeHeight + 15,
 	                                             this.PictureWidth,
 	                                             this.PictureHeight);
@@ -72,12 +76,12 @@ public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 	    
 	    public int add(T transport, W gunsForm)
 	    {
-	        for (int i = 0; i < this._places.length; i++)
+	        for (int i = 0; i < this._places.size(); i++)
 	        {
 	            if (this.CheckFreePlace(i))
 	            {
-	            	this._places[i] =  transport;
-	            	this._places[i].SetPosition(30 + i / 5 * _placeSizeWidth + 5,
+	            	_places.put(i, transport);
+	            	_places.get(i).SetPosition(30 + i / 5 * _placeSizeWidth + 5,
 	                                             i % 5 * _placeSizeHeight + 15,
 	                                             this.PictureWidth,
 	                                             this.PictureHeight);
@@ -94,14 +98,14 @@ public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 	    
 	    public T sub (int index)
 	    {
-	        if (index < 0 || index > this._places.length)
+	        if (index < 0 || index > this._places.size())
 	        {
 	            return null;
 	        }
 	        if (!this.CheckFreePlace(index))
 	        {
-	            T machine = this._places[index];
-	            this._places[index] = null;
+	            T machine = this._places.get(index);
+	            _places.remove(index);
 
 	         
 	            return machine;
@@ -119,7 +123,7 @@ public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 	    	 int score=0;
 	    	 int k = -1;
 	    
-	    	for (int i = 0; i < this._places.length; i++)
+	    	for (int i = 0; i < this._places.size(); i++)
 	        {
 	            if (!this.CheckFreePlace(i))
 	            {
@@ -176,7 +180,7 @@ public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 	    	 int score=0;
 	    	 
 	    
-	    	for (int i = 0; i < this._places.length; i++)
+	    	for (int i = 0; i < this._places.size(); i++)
 	        {
 	            if (!this.CheckFreePlace(i))
 	            {
@@ -185,10 +189,10 @@ public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 	        }
 	    		num = (score/num)-1;
 	    	
-	    	for (int i = _places.length-1; i > num; i--) 
+	    	for (int i = _places.size()-1; i > num; i--) 
 	    	{
-	    		 if(_places[i]!=null)
-		          _places[i] = null;
+	    		 if(_places.get(i)!=null)
+		          _places.remove(i);
 
 		         
 		            
@@ -204,7 +208,7 @@ public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 	    
 	    private boolean CheckFreePlace(int index)
 	    {
-	        return _places[index] == null;
+	        return _places.get(index) == null;
 	    }
 	    
 	    
@@ -212,11 +216,11 @@ public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 	    public void Draw(Graphics g)
 	    {
 	        DrawMarking(g); 
-	        for (int i = 0; i < _places.length; i++)
+	        for (int i = 0; i < _places.size(); i++)
 	        {
 	            if (!CheckFreePlace(i))
 	            {  
-	                _places[i].DrawTransport(g);
+	                _places.get(i).DrawTransport(g);
 	                
 	            }
 	        }
@@ -227,8 +231,8 @@ public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 	    {
 	        g.setColor(Color.BLACK);
 	       
-	        g.drawRect(0, 0, (_places.length / 5) * _placeSizeWidth, 700);
-	        for (int i = 0; i < _places.length / 5; i++)
+	        g.drawRect(0, 0, (_places.size() / 5) * _placeSizeWidth, 700);
+	        for (int i = 0; i < _places.size() / 5; i++)
 	        {
 	            for (int j = 0; j < 6; ++j)
 	            {            
