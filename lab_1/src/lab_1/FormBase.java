@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Random;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import javax.swing.JList;
 
 public class FormBase {
 
@@ -22,8 +23,8 @@ public class FormBase {
 	Random rnd = new Random();
 	private JTextField textField;
 	ITransport transport=null;
-	
-	
+	private static int countLevel = 5;
+	JList list_box = new JList();
 	
 	
 
@@ -73,7 +74,7 @@ public class FormBase {
 				
 			   Color mainColor = JColorChooser.showDialog(pictureBoxBig, "chose", Color.BLACK);
 				transport = new WarCar(rnd.nextInt(20)+100, rnd.nextInt(1000)+1000, mainColor);		
-				 base.clone(mainColor, null, 0);
+				base.clone(mainColor, null, 0);
 				base.add(transport);
 				
 				
@@ -142,15 +143,12 @@ public class FormBase {
 		JButton button_TakeCar = new JButton("\u0437\u0430\u0431\u0440\u0430\u0442\u044C");
 		button_TakeCar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
-								
+					
 				transport = base.sub(Integer.valueOf(textField.getText()));
 				
 				transport.SetPosition(40, 10, ExitPanel.WIDTH, ExitPanel.HEIGHT);
 
-				 ((ExitPanel) panel_Exit).addTransport(transport);
-							
+				 ((ExitPanel) panel_Exit).addTransport(transport);							
 				
 			}
 		});
@@ -165,19 +163,8 @@ public class FormBase {
 		JButton Button_multy = new JButton("\u0443\u043C\u043D\u043E\u0436\u0435\u043D\u0438\u0435");
 		Button_multy.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-			
-			
-				
-	
 		base.mylty(2);
-		pictureBoxBig.repaint();
-		
-		
-		
-		
-		
-				
+		pictureBoxBig.repaint();		
 			}
 		});
 		Button_multy.setBounds(829, 157, 126, 40);
@@ -186,15 +173,16 @@ public class FormBase {
 		JButton Button_Del = new JButton("\u0434\u0435\u043B\u0435\u043D\u0438\u0435");
 		Button_Del.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
-				
 				base.del(2);
 				pictureBoxBig.repaint();
 			}
 		});
 		Button_Del.setBounds(829, 205, 126, 40);
 		frame.getContentPane().add(Button_Del);
+		
+		
+		list_box.setBounds(773, 559, 189, 126);
+		frame.getContentPane().add(list_box);
 		
 		
 	}
