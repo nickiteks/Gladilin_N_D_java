@@ -5,32 +5,29 @@ import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 
 public class MultyLevelParking<T> {
+		
+	WarBase<ITransport, IGuns> base= new WarBase<ITransport ,IGuns>(20, 663, 440);
 	
-	 ArrayList<T> parkingStages = new ArrayList<T>();
+	ArrayList parkingStages = new ArrayList()  ; 
 	
 	private static int countPlaces = 20;
 	
-	
-	
 	public void MultiLevelParking(int countStages, int pictureWidth, int pictureHeight)
 	 {
-	 parkingStages = (ArrayList<T>) new ArrayList<WarBase<ITransport,IGuns>>();
-	 	for (int i = 0; i < countStages; ++i)
-	 	{
+		for (int i = 0; i < countStages; ++i)
+		 {
+			
+		 parkingStages.add(new WarBase<ITransport,IGuns>(countPlaces, pictureWidth,pictureHeight));
 		 
-		 parkingStages.add((T) new WarBase<ITransport,IGuns>(countPlaces, pictureWidth,
-			 pictureHeight));
-	 	}
+		 }
 	 }
-	/*
-	public  Object getLevel( int ind) {
-		if(ind>-1 && ind < parkingStages.size()) {
-			
-			return parkingStages[ind];
-			
-		}
-		return null;
-	}
-	*/
-	
+	// indecsator
+	public  int index_Re(int index) {
+		
+		if (index > -1 && index < parkingStages.size())
+		 {
+			return index;
+		 }
+		return -1;
+	}		
 }

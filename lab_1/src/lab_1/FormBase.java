@@ -15,6 +15,8 @@ import java.util.Random;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JList;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class FormBase {
 
@@ -24,9 +26,9 @@ public class FormBase {
 	private JTextField textField;
 	ITransport transport=null;
 	private static int countLevel = 5;
-	JList list_box = new JList();
 	
-	
+	private final String[] data1 = { "Уровень 1" ,"Уровень 2" ,"Уровень 3" ,"Уровень 4" ,"Уровень 5"};
+	JList list_box_levels =  new JList(data1);
 
 	/**
 	 * Launch the application.
@@ -48,7 +50,7 @@ public class FormBase {
 	 * Create the application.
 	 */
 	public FormBase() {
-		initialize();
+		initialize();		
 	}
 
 	/**
@@ -60,6 +62,9 @@ public class FormBase {
 		frame.setBounds(100, 100, 988, 776);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+		
+		
 		
 		WarBase<ITransport, IGuns> base= new WarBase<ITransport ,IGuns>(20, 663, 440);
 		
@@ -179,10 +184,21 @@ public class FormBase {
 		});
 		Button_Del.setBounds(829, 205, 126, 40);
 		frame.getContentPane().add(Button_Del);
+		list_box_levels.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				 if (list_box_levels.getSelectedIndex() != -1) {
+					 
+
+					 
+				 }				
+			}
+		});
 		
 		
-		list_box.setBounds(773, 559, 189, 126);
-		frame.getContentPane().add(list_box);
+		list_box_levels.setBounds(773, 559, 189, 126);
+		frame.getContentPane().add(list_box_levels);
 		
 		
 	}
