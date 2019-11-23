@@ -1,18 +1,17 @@
 package lab_1;
 
+import java.awt.Container;
 import java.awt.List;
 import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 
-public class MultyLevelParking<T> {
-		
-	WarBase<ITransport, IGuns> base= new WarBase<ITransport ,IGuns>(20, 663, 440);
-	
-	ArrayList parkingStages = new ArrayList()  ; 
+public class MultyLevelParking {
+				
+	ArrayList<WarBase<ITransport, IGuns>> parkingStages = new ArrayList<WarBase<ITransport, IGuns>>()  ; 
 	
 	private static int countPlaces = 20;
 	
-	public void MultiLevelParking(int countStages, int pictureWidth, int pictureHeight)
+	public MultyLevelParking(int countStages, int pictureWidth, int pictureHeight)
 	 {
 		for (int i = 0; i < countStages; ++i)
 		 {
@@ -22,12 +21,13 @@ public class MultyLevelParking<T> {
 		 }
 	 }
 	// indecsator
-	public  int index_Re(int index) {
+	public  int select_index(int index) {
 		
 		if (index > -1 && index < parkingStages.size())
 		 {
 			return index;
 		 }
 		return -1;
-	}		
+	}
+		
 }

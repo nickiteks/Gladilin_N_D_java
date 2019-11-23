@@ -21,13 +21,15 @@ import java.awt.event.MouseEvent;
 public class FormBase {
 
 	private JFrame frame;
+	MultyLevelParking parking ; 
 	private WarBasePanel pictureBoxBig;
 	Random rnd = new Random();
 	private JTextField textField;
 	ITransport transport=null;
+	private int index;
 	private static int countLevel = 5;
 	
-	private final String[] data1 = { "Уровень 1" ,"Уровень 2" ,"Уровень 3" ,"Уровень 4" ,"Уровень 5"};
+	private  String[] data1 = {"Уровень 1" ,"Уровень 2" ,"Уровень 3" ,"Уровень 4" ,"Уровень 5" };
 	JList list_box_levels =  new JList(data1);
 
 	/**
@@ -50,7 +52,7 @@ public class FormBase {
 	 * Create the application.
 	 */
 	public FormBase() {
-		initialize();		
+		initialize();	
 	}
 
 	/**
@@ -63,28 +65,26 @@ public class FormBase {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		
-		
+
+
+		parking =  new MultyLevelParking(countLevel,pictureBoxBig.WIDTH, pictureBoxBig.HEIGHT);
 		
 		WarBase<ITransport, IGuns> base= new WarBase<ITransport ,IGuns>(20, 663, 440);
 		
-		pictureBoxBig = new WarBasePanel(base);
+		pictureBoxBig = new WarBasePanel(parking,index);
 		pictureBoxBig.setBounds(22, 21, 719, 705);
 		frame.getContentPane().add(pictureBoxBig);
 		
 		JButton button = new JButton("\u043C\u0430\u0448\u0438\u043D\u0430");
 		button.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
 				
 				
 			   Color mainColor = JColorChooser.showDialog(pictureBoxBig, "chose", Color.BLACK);
 				transport = new WarCar(rnd.nextInt(20)+100, rnd.nextInt(1000)+1000, mainColor);		
 				base.clone(mainColor, null, 0);
-				base.add(transport);
-				
-				
-				
-							
+			parking.parkingStages.get(index).add(transport) ;			
 			}
 		});
 		button.setBounds(829, 55, 126, 40);
@@ -131,8 +131,8 @@ public class FormBase {
 				
 				
 				
-							
-				base.add(transport,gunsForm);           
+				parking.parkingStages.get(index).add(transport, gunsForm);			
+				//base.add(transport,gunsForm);           
 				
 				
 			}
@@ -189,9 +189,9 @@ public class FormBase {
 			public void mouseClicked(MouseEvent e) {
 				
 				 if (list_box_levels.getSelectedIndex() != -1) {
-					 
-
-					 
+					index = list_box_levels.getSelectedIndex();	
+					pictureBoxBig.get_index(index);
+					pictureBoxBig.repaint();
 				 }				
 			}
 		});

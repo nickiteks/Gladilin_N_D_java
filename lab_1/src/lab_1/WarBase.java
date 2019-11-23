@@ -10,7 +10,7 @@ public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 	
 	Random rnd = new Random();
 	
-		//private T[] _places;
+		//private T[] _places;		    
 		
 		private W[] gunsForm;
 	
@@ -39,9 +39,7 @@ public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 	    	gunsForm = (W[]) new Object[sizes];
 	    	PictureWidth = pictureWidth;	    	
 	    	 PictureHeight = pictureHeight;
-	    	
-	    	 
-	    		    
+   		    
 	    }
 	    
 	    public void clone(Color mainColor ,Color dopColor,int type)

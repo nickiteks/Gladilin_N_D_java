@@ -8,19 +8,23 @@ public class WarBasePanel extends JPanel {
 	
 	
 	
-	WarBase<ITransport, IGuns> base;
+	MultyLevelParking base;
 	
-
+	int index;
 	
-	public WarBasePanel(WarBase<ITransport, IGuns> base) {
-		this.base = base;
+	public WarBasePanel(MultyLevelParking parking,int index) {
+		this.base = parking;
+		this.index=index;
 	}
-
+	
+	public void get_index(int index){
+		this.index=index;		
+	}
 	
 	public void paint(Graphics g) 
 	{
 		super.paint(g);
-		base.Draw(g);
+		base.parkingStages.get(index).Draw(g);;
 		repaint();
 	}
 	
