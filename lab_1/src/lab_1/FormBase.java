@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JColorChooser;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -27,8 +28,8 @@ public class FormBase {
 	private JTextField textField;
 	ITransport transport=null;
 	private int index;
-	private static int countLevel = 5;
-	
+	ArrayList deleted_machine = new ArrayList();
+	private static int countLevel = 5;	
 	private  String[] data1 = {"Уровень 1" ,"Уровень 2" ,"Уровень 3" ,"Уровень 4" ,"Уровень 5" };
 	JList list_box_levels =  new JList(data1);
 
@@ -47,7 +48,6 @@ public class FormBase {
 			}
 		});
 	}
-
 	/**
 	 * Create the application.
 	 */
@@ -57,24 +57,17 @@ public class FormBase {
 
 	/**
 	 * Initialize the contents of the frame.
-	 */
-	
+	 */	
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 988, 776);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
-
-
-		parking =  new MultyLevelParking(countLevel,pictureBoxBig.WIDTH, pictureBoxBig.HEIGHT);
-		
-		WarBase<ITransport, IGuns> base= new WarBase<ITransport ,IGuns>(20, 663, 440);
-		
+		parking =  new MultyLevelParking(countLevel,pictureBoxBig.WIDTH, pictureBoxBig.HEIGHT);	
+		WarBase<ITransport, IGuns> base= new WarBase<ITransport ,IGuns>(20, 663, 440);		
 		pictureBoxBig = new WarBasePanel(parking,index);
 		pictureBoxBig.setBounds(22, 21, 719, 705);
-		frame.getContentPane().add(pictureBoxBig);
-		
+		frame.getContentPane().add(pictureBoxBig);		
 		JButton button = new JButton("\u043C\u0430\u0448\u0438\u043D\u0430");
 		button.addActionListener(new ActionListener() {
 			
@@ -92,14 +85,10 @@ public class FormBase {
 		
 		JButton button_1 = new JButton("\u0442\u0430\u043D\u043A");
 		button_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
+			public void actionPerformed(ActionEvent e) {			
 				Color mainColor = JColorChooser.showDialog(pictureBoxBig, "chose", Color.BLACK);
-				Color DopColor = JColorChooser.showDialog(pictureBoxBig, "chose", Color.BLACK);
-				
-				 base.clone(mainColor, DopColor, 1);
-				 
-				 
+				Color DopColor = JColorChooser.showDialog(pictureBoxBig, "chose", Color.BLACK);			
+				base.clone(mainColor, DopColor, 1);				 
 				transport = new tank(rnd.nextInt(20)+100,
 						guns.superGun, 
 						rnd.nextInt(1000)+1000, 
@@ -107,10 +96,7 @@ public class FormBase {
 						DopColor,
 				        false, 
 				        false, 
-				        false);
-				
-				
-				
+				        false);				
 	guns _guns = guns.superGun;
 								
 	IGuns gunsForm = new gunsDraw(_guns, DopColor); ;
@@ -126,15 +112,8 @@ public class FormBase {
 				case 3:
 				gunsForm = new LargeGuns(_guns, DopColor);
 					break;					
-				}
-				
-				
-				
-				
-				parking.parkingStages.get(index).add(transport, gunsForm);			
-				//base.add(transport,gunsForm);           
-				
-				
+				}				
+				parking.parkingStages.get(index).add(transport, gunsForm);	          			
 			}
 		});
 		button_1.setBounds(829, 106, 126, 40);
@@ -148,13 +127,17 @@ public class FormBase {
 		JButton button_TakeCar = new JButton("\u0437\u0430\u0431\u0440\u0430\u0442\u044C");
 		button_TakeCar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				deleted_machine.add(transport);
 					
-				transport = base.sub(Integer.valueOf(textField.getText()));
+				transport = parking.parkingStages.get(index).sub(Integer.valueOf(textField.getText()));
 				
 				transport.SetPosition(40, 10, ExitPanel.WIDTH, ExitPanel.HEIGHT);
 
-				 ((ExitPanel) panel_Exit).addTransport(transport);							
-				
+				 ((ExitPanel) panel_Exit).addTransport(transport);	
+				 				 
+				//System.out.print(parking.chose_element(0,0));
+				//System.out.print(deleted_machine);
 			}
 		});
 		button_TakeCar.setBounds(847, 327, 89, 23);
@@ -194,9 +177,7 @@ public class FormBase {
 					pictureBoxBig.repaint();
 				 }				
 			}
-		});
-		
-		
+		});		
 		list_box_levels.setBounds(773, 559, 189, 126);
 		frame.getContentPane().add(list_box_levels);
 		

@@ -21,13 +21,10 @@ public class MultyLevelParking {
 		 }
 	 }
 	// indecsator
-	public  int select_index(int index) {
+	public  <T> ITransport chose_element(int index_level,int index_parking) {
+				
+		return parkingStages.get(index_level)._places.get(index_parking);
 		
-		if (index > -1 && index < parkingStages.size())
-		 {
-			return index;
-		 }
-		return -1;
 	}
 		
 }
