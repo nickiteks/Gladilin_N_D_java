@@ -15,11 +15,12 @@ public class MultyLevelParking {
 	 {
 		for (int i = 0; i < countStages; ++i)
 		 {		
-		 parkingStages.add(new WarBase<ITransport,IGuns>(countPlaces, pictureWidth,pictureHeight));	 
+		 parkingStages.add(new WarBase<ITransport,IGuns>(countPlaces, pictureWidth,pictureHeight));		 
 		 }
 	 }
-	public  <T> ITransport chose_element(int index_level,int index_parking) {			
-		return parkingStages.get(index_level)._places.get(index_parking);		
+	public  <T> ITransport chose_element(int index_level,int index_parking) {
+				
+		return parkingStages.get(index_level)._places.get(index_parking);	
 	}
-		
+	
 }

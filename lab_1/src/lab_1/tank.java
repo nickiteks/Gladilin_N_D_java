@@ -6,7 +6,6 @@ import java.util.Random;
 
 public class tank extends WarCar  {
 	static Random random= new Random();
-	
 	public Color DopColor ;
 
 	public boolean firstGun ;
@@ -19,16 +18,17 @@ public class tank extends WarCar  {
 	
 	Random rnd =new Random();
 	
-	private int typeGun = rnd.nextInt(3)+1;
+	private int typeGun = 1;
 
 	public tank(int maxSpeed,
 			guns guns, 
-			float weight, 
+			float weight,
 			Color mainColor, 
 			Color dopColor,
 			boolean frontSpoiler, 
 			boolean sideSpoiler, 
-			boolean backSpoiler)
+			boolean backSpoiler,
+			int typeGun)
 	{
 		super(
 		maxSpeed,
@@ -40,15 +40,14 @@ public class tank extends WarCar  {
 		firstGun = frontSpoiler;
 		secondGun = sideSpoiler;
 		thirdGun = backSpoiler;
+		this.typeGun =typeGun;
 	}
-
 	public  void DrawTransport(Graphics g)
-	{		
+	{
 		if (firstGun)
 		{
 			g.setColor(DopColor);
 			g.drawRect( _startPosX + 5, _startPosY + 10, 85, 10);
-
 			g.fillRect( _startPosX + 5, _startPosY + 10, 85, 10);
 			g.drawRect( _startPosX + 5, _startPosY + 10, 85, 10);
 		}
@@ -56,15 +55,11 @@ public class tank extends WarCar  {
 		{
 			g.setColor(DopColor);
 			g.drawRect( _startPosX + 5, _startPosY + 40, 85, 6);
-
 			g.fillRect( _startPosX + 5, _startPosY + 40, 85, 6);
-
 			g.drawRect( _startPosX + 5, _startPosY + 40, 85, 6);
-
 		}
 		if (thirdGun)
 		{ g.setColor(DopColor);
-
 		g.drawRect( _startPosX - 35, _startPosY + 32, 80, 6);
 		g.fillRect( _startPosX - 35, _startPosY + 32, 80, 6);
 		g.drawRect( _startPosX - 35, _startPosY + 32, 80, 6);
@@ -85,7 +80,7 @@ public class tank extends WarCar  {
 		g.drawRect(_startPosX + 10, _startPosY - 5, 20, 10);
 		g.fillRect( _startPosX + 10, _startPosY - 5, 20, 10);
 		g.drawRect( _startPosX + 10, _startPosY - 5, 20, 10);
-		g.fillOval( _startPosX, _startPosY, 52, 31);	
+		g.fillOval( _startPosX, _startPosY, 52, 31);		
 		g.fillOval( _startPosX, _startPosY, 52, 31);	
 		g.setColor(Color.black);
 		g.drawRect(_startPosX + 10, _startPosY + 10, 25, 10);
