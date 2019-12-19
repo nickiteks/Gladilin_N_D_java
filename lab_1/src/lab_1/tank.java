@@ -21,16 +21,17 @@ public class tank extends WarCar  {
 	
 	Random rnd =new Random();
 	
-	private int typeGun = rnd.nextInt(3)+1;
+	private int typeGun = 1;
 
 	public tank(int maxSpeed,
 			guns guns, 
-			float weight, 
+			float weight,
 			Color mainColor, 
 			Color dopColor,
 			boolean frontSpoiler, 
 			boolean sideSpoiler, 
-			boolean backSpoiler)
+			boolean backSpoiler,
+			int typeGun)
 	{
 		super(
 		maxSpeed,
@@ -42,6 +43,7 @@ public class tank extends WarCar  {
 		firstGun = frontSpoiler;
 		secondGun = sideSpoiler;
 		thirdGun = backSpoiler;
+		this.typeGun =typeGun;
 	}
 
 	

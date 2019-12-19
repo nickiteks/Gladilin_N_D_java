@@ -32,6 +32,13 @@ public class FormBase {
 	private static int countLevel = 5;	
 	private  String[] data1 = {"Уровень 1" ,"Уровень 2" ,"Уровень 3" ,"Уровень 4" ,"Уровень 5" };
 	JList list_box_levels =  new JList(data1);
+	
+	class Delegate extends WarDeligate {
+		public void induce(ITransport transport) {
+			parking.parkingStages.get(index).add(transport);
+			pictureBoxBig.repaint();			
+		}
+	}
 
 	/**
 	 * Launch the application.
@@ -96,7 +103,8 @@ public class FormBase {
 						DopColor,
 				        false, 
 				        false, 
-				        false);				
+				        false,
+				        rnd.nextInt(3)+1);				
 	guns _guns = guns.superGun;
 								
 	IGuns gunsForm = new gunsDraw(_guns, DopColor); ;
@@ -181,6 +189,13 @@ public class FormBase {
 		list_box_levels.setBounds(773, 559, 189, 126);
 		frame.getContentPane().add(list_box_levels);
 		
-		
+		JButton btnAdd = new JButton("add");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FormWarConfig config = new FormWarConfig(new Delegate());
+			}
+		});
+		btnAdd.setBounds(749, 256, 89, 23);
+		frame.getContentPane().add(btnAdd);
 	}
 }

@@ -139,7 +139,7 @@ public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 							dopColor,
 					        false, 
 					        false, 
-					        false);	
+					        false,1);	
 		    			    		
 		    	}
 	    			add((T) _transport);		
