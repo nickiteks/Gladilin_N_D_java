@@ -40,14 +40,15 @@ public class tank extends WarCar  {
 		firstGun = frontSpoiler;
 		secondGun = sideSpoiler;
 		thirdGun = backSpoiler;
-	}	
+	}
+
 	public  void DrawTransport(Graphics g)
-	{
-		
+	{		
 		if (firstGun)
 		{
 			g.setColor(DopColor);
 			g.drawRect( _startPosX + 5, _startPosY + 10, 85, 10);
+
 			g.fillRect( _startPosX + 5, _startPosY + 10, 85, 10);
 			g.drawRect( _startPosX + 5, _startPosY + 10, 85, 10);
 		}
@@ -55,11 +56,15 @@ public class tank extends WarCar  {
 		{
 			g.setColor(DopColor);
 			g.drawRect( _startPosX + 5, _startPosY + 40, 85, 6);
+
 			g.fillRect( _startPosX + 5, _startPosY + 40, 85, 6);
+
 			g.drawRect( _startPosX + 5, _startPosY + 40, 85, 6);
+
 		}
 		if (thirdGun)
 		{ g.setColor(DopColor);
+
 		g.drawRect( _startPosX - 35, _startPosY + 32, 80, 6);
 		g.fillRect( _startPosX - 35, _startPosY + 32, 80, 6);
 		g.drawRect( _startPosX - 35, _startPosY + 32, 80, 6);
@@ -74,17 +79,16 @@ public class tank extends WarCar  {
 			break;
 		case 3:
 			new LargeGuns(guns, DopColor).draw(g, _startPosX, _startPosY);
-			break;			
-		}
+			break;		
+		}		
 		g.setColor(MainColor);
 		g.drawRect(_startPosX + 10, _startPosY - 5, 20, 10);
 		g.fillRect( _startPosX + 10, _startPosY - 5, 20, 10);
 		g.drawRect( _startPosX + 10, _startPosY - 5, 20, 10);
-		g.fillOval( _startPosX, _startPosY, 52, 31);		
+		g.fillOval( _startPosX, _startPosY, 52, 31);	
 		g.fillOval( _startPosX, _startPosY, 52, 31);	
 		g.setColor(Color.black);
 		g.drawRect(_startPosX + 10, _startPosY + 10, 25, 10);
-		g.drawRect( 0, 0, 826, 338);
 		super.DrawTransport(g);
 	}
 }
