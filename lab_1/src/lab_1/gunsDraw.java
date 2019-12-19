@@ -3,7 +3,7 @@ package lab_1;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class gunsDraw {
+public class gunsDraw implements IGuns {	
 	guns guns;
 	Color colorGun;
 	public gunsDraw(guns guns, Color _colorGun) {
@@ -16,17 +16,17 @@ public class gunsDraw {
 		switch (guns)
 		{
 		case ultra_superGun:			
-			g.drawRect( startX + 5, startY + size, 85, 5);		
+			g.drawRect( startX + 5, startY + size, 85, 5);			
 			g.fillRect( startX + 5, startY + size, 85, 5);			
-			size+=9;		
+			size+=9;			
 		case superGun:		
 			g.drawRect( startX + 5, startY + size, 85, 5);		
 			g.fillRect( startX + 5, startY + size, 85, 5);			
 			size+=9;		
-		case powerGun:			
+		case powerGun:		
 			g.drawRect( startX + 5, startY + size, 85, 5);			
 			g.fillRect( startX + 5, startY + size, 85, 5);				
-			break;						
+			break;					
 		}			
 	}
 }

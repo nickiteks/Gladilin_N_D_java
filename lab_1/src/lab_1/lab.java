@@ -17,10 +17,12 @@ import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
 
 public class lab {
-	private JFrame frame;
+	JFrame frame;
+	
 	final Random rnd = new Random();
-	 tank tank=new tank(rnd.nextInt(20)+100,guns.powerGun, rnd.nextInt(1000)+1000, Color.green,
-		        Color.yellow, false, false, false);
+	
+	ITransport transport;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -49,15 +51,17 @@ public class lab {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 900,500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		tankPanel panel = new tankPanel(tank);
+		frame.getContentPane().setLayout(null);	
+		transport = new tank(rnd.nextInt(20)+100,guns.powerGun, rnd.nextInt(1000)+1000, Color.green,
+		        Color.yellow, false, false, false);	
+		WarPanel panel = new WarPanel(transport);
 		panel.setBounds(30, 45, 827, 339);
 		frame.getContentPane().add(panel);
 		JButton buttomUp = new JButton("");
 		buttomUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {			
-				tank.moveTank(Direction.Up);
-				panel.setTank(tank);
+				transport.MoveTransport(Direction.Up);
+				panel.setTransport(transport);
 				panel.repaint();
 			}
 		});
@@ -66,48 +70,57 @@ public class lab {
 		JButton ButtonRight = new JButton("");
 		ButtonRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				tank.moveTank(Direction.Right);
-				panel.setTank(tank);
+				transport.MoveTransport(Direction.Right);
+				panel.setTransport(transport);
 				panel.repaint();
-			}
-			
+			}		
 		});
 		ButtonRight.setBounds(743, 427, 20, 20);
 		frame.getContentPane().add(ButtonRight);
-
 		JButton buttonLeft = new JButton("");
 		buttonLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				tank.moveTank(Direction.Left);
-				panel.setTank(tank);
+				transport.MoveTransport(Direction.Left);
+				panel.setTransport(transport);
 				panel.repaint();			
 			}
 		});
 		buttonLeft.setBounds(698, 427, 20, 20);
 		frame.getContentPane().add(buttonLeft);
-
 		JButton buttonDown = new JButton("");
 		buttonDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				tank.moveTank(Direction.Down);
-				panel.setTank(tank);
+				transport.MoveTransport(Direction.Down);
+				panel.setTransport(transport);
 				panel.repaint();
 			}
 		});
 		buttonDown.setBounds(721, 427, 20, 20);
 		frame.getContentPane().add(buttonDown);
 
-
-
-		JButton button = new JButton("\u0441\u043E\u0437\u0434\u0430\u0442\u044C");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {		
-				tank.SetPosition(rnd.nextInt(50), rnd.nextInt(50), 827, 339);
-				panel.setTank(tank);
+		JButton btnDop = new JButton("Dop");
+		btnDop.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {			
+				transport = new tank(rnd.nextInt(20)+100,guns.ultra_superGun, rnd.nextInt(1000)+1000, Color.green,
+				        Color.yellow, false, false, false);												
+				transport.SetPosition(rnd.nextInt(50), rnd.nextInt(50), 827, 339);
+				panel.setTransport(transport);
 				panel.repaint();				
 			}
 		});
-		button.setBounds(420, 11, 89, 23);
-		frame.getContentPane().add(button);
+		btnDop.setBounds(420, 11, 89, 23);
+		frame.getContentPane().add(btnDop);
+		
+		JButton button_main = new JButton("\u043E\u0441\u043D\u043E\u0432\u0430");
+		button_main.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {				
+				transport = new WarCar(rnd.nextInt(20)+100, rnd.nextInt(1000)+1000, Color.green);
+				transport.SetPosition(rnd.nextInt(50), rnd.nextInt(50), 827, 339);
+				panel.setTransport(transport);
+				panel.repaint();			
+			}
+		});
+		button_main.setBounds(522, 11, 89, 23);
+		frame.getContentPane().add(button_main);
 	}
 }
