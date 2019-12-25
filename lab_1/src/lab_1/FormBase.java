@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
+import javax.swing.JFileChooser;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -15,9 +16,16 @@ import java.util.Map;
 import java.util.Random;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JList;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
+
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JMenu;
 
 public class FormBase {
 
@@ -30,7 +38,7 @@ public class FormBase {
 	private int index;
 	ArrayList deleted_machine = new ArrayList();
 	private static int countLevel = 5;	
-	private  String[] data1 = {"Óðîâåíü 1" ,"Óðîâåíü 2" ,"Óðîâåíü 3" ,"Óðîâåíü 4" ,"Óðîâåíü 5" };
+	private  String[] data1 = {"Ð£Ñ€Ð¾Ð²ÐµÐ½ÑŒ 1" ,"Ð£Ñ€Ð¾Ð²ÐµÐ½ÑŒ 2" ,"Ð£Ñ€Ð¾Ð²ÐµÐ½ÑŒ 3" ,"Ð£Ñ€Ð¾Ð²ÐµÐ½ÑŒ 4" ,"Ð£Ñ€Ð¾Ð²ÐµÐ½ÑŒ 5" };
 	JList list_box_levels =  new JList(data1);
 	
 	class Delegate extends WarDeligate {
@@ -97,7 +105,6 @@ public class FormBase {
 				Color DopColor = JColorChooser.showDialog(pictureBoxBig, "chose", Color.BLACK);			
 				base.clone(mainColor, DopColor, 1);				 
 				transport = new tank(rnd.nextInt(20)+100,
-						guns.superGun, 
 						rnd.nextInt(1000)+1000, 
 						mainColor,
 						DopColor,
@@ -197,5 +204,89 @@ public class FormBase {
 		});
 		btnAdd.setBounds(749, 256, 89, 23);
 		frame.getContentPane().add(btnAdd);
+		
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBounds(0, 0, 247, 23);
+		frame.getContentPane().add(menuBar);
+		
+		JMenu mnFile = new JMenu("file");
+		menuBar.add(mnFile);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("save");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser filechooser = new JFileChooser();
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("txt", "txt");
+				filechooser.setFileFilter(filter);
+				int loc = filechooser.showDialog(null, "save");
+				if (loc == JFileChooser.APPROVE_OPTION) {
+					File file = filechooser.getSelectedFile();
+					pictureBoxBig.SaveInfo(file.getAbsolutePath() + ".txt");
+				}
+			}
+		});
+		mnFile.add(mntmNewMenuItem);
+		
+		JMenuItem mntmLoad = new JMenuItem("load");
+		menuBar.add(mntmLoad);
+		mntmLoad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser filechooser = new JFileChooser();
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("txt", "txt");
+				filechooser.setFileFilter(filter);
+				int loc = filechooser.showDialog(null, "load");
+				if (loc == JFileChooser.APPROVE_OPTION) {
+					File file = filechooser.getSelectedFile();
+					pictureBoxBig.LoadInfo(file.getAbsolutePath());
+					pictureBoxBig.repaint();
+				}
+			}
+		});
+		mnFile.add(mntmLoad);
+		
+		JMenuItem mntmSaveLevel = new JMenuItem("SaveLevel");
+		mntmSaveLevel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+				JFileChooser filechooser = new JFileChooser();
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("lvl", "lvl");
+				filechooser.setFileFilter(filter);
+				int loc = filechooser.showDialog(null, "SaveLevel");
+				if (loc == JFileChooser.APPROVE_OPTION) {
+					File file = filechooser.getSelectedFile();
+					
+						parking.SaveLevel(file.getAbsolutePath() , index);
+					
+				}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		mnFile.add(mntmSaveLevel);	
+		
+		JMenuItem mntmLevelLoad = new JMenuItem("LoadLevel");
+		mntmLevelLoad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser filechooser = new JFileChooser();
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("lvl", "lvl");
+				filechooser.setFileFilter(filter);
+				int ret = filechooser.showDialog(null, "LoadLevel");                
+				if (ret == JFileChooser.APPROVE_OPTION) {
+				    File file = filechooser.getSelectedFile();
+				    try {
+						parking.LoadLevel(file.getAbsolutePath());
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
+		mnFile.add(mntmLevelLoad);
+		
+		
 	}
+	
+
+
 }

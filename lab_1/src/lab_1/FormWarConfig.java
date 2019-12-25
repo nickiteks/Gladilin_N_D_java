@@ -21,8 +21,7 @@ public class FormWarConfig {
 	Color WorkColor = Color.WHITE;
 	Color WorkDopColor = Color.WHITE;
 	Random rnd =new Random();
-	private ITransport transport = new tank(rnd.nextInt(20)+100,
-			guns.superGun, 
+	private ITransport transport = new tank(rnd.nextInt(20)+100, 
 			rnd.nextInt(1000)+1000, 
 			Color.white,
 			Color.white,
@@ -266,8 +265,7 @@ public class FormWarConfig {
 		lblTank.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
-				transport = new tank(rnd.nextInt(20)+100,
-						guns.superGun, 
+				transport = new tank(rnd.nextInt(20)+100, 
 						rnd.nextInt(1000)+1000, 
 						WorkColor,
 						WorkDopColor,

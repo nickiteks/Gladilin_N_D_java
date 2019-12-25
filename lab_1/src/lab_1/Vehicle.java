@@ -35,4 +35,5 @@ public abstract class Vehicle implements ITransport {
 	 
 	 public abstract void MoveTransport(Direction direction);
 	 
+
 }

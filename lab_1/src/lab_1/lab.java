@@ -58,7 +58,7 @@ public class lab {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		transport = new tank(rnd.nextInt(20)+100,guns.powerGun, rnd.nextInt(1000)+1000, Color.green,
+		transport = new tank(rnd.nextInt(20)+100, rnd.nextInt(1000)+1000, Color.green, 
 		        Color.yellow, false, false, false,1);
 		
 		WarPanel panel = new WarPanel(transport);
@@ -121,7 +121,7 @@ public class lab {
 			public void actionPerformed(ActionEvent e) {
 				
 				
-				transport = new tank(rnd.nextInt(20)+100,guns.ultra_superGun, rnd.nextInt(1000)+1000, Color.green,
+				transport = new tank(rnd.nextInt(20)+100, rnd.nextInt(1000)+1000, Color.green, 
 				        Color.yellow, false, false, false,1);
 												
 				transport.SetPosition(rnd.nextInt(50), rnd.nextInt(50), 827, 339);
