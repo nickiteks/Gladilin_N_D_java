@@ -3,7 +3,7 @@ package lab_1;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class LargeGuns {
+public class LargeGuns implements IGuns{
 	guns guns;
 	Color colorGun;
 	public  LargeGuns(guns guns, Color _colorGun) 
