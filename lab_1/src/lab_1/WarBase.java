@@ -179,6 +179,3 @@ public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 	        }
 	    }	    		
 }
-	    
-
-
