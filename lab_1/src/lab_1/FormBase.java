@@ -32,6 +32,13 @@ public class FormBase {
 	private static int countLevel = 5;	
 	private  String[] data = {"Уровень 1" ,"Уровень 2" ,"Уровень 3" ,"Уровень 4" ,"Уровень 5" };
 	JList list_box_levels =  new JList(data);
+	
+	class Delegate extends WarDeligate {
+		public void induce(ITransport transport) {
+			parking.parkingStages.get(index).add(transport);
+			pictureBoxBig.repaint();			
+		}
+	}
 
 	/**
 	 * Launch the application.
@@ -70,7 +77,7 @@ public class FormBase {
 		frame.getContentPane().add(pictureBoxBig);		
 		JButton button_Car = new JButton("\u043C\u0430\u0448\u0438\u043D\u0430");
 		button_Car.addActionListener(new ActionListener() {			
-			public void actionPerformed(ActionEvent e) {	
+			public void actionPerformed(ActionEvent e) {				
 			   Color mainColor = JColorChooser.showDialog(pictureBoxBig, "chose", Color.BLACK);
 				transport = new WarCar(rnd.nextInt(20)+100, rnd.nextInt(1000)+1000, mainColor);		
 				base.clone(mainColor, null, 0);
@@ -93,11 +100,11 @@ public class FormBase {
 						DopColor,
 				        false, 
 				        false, 
-				        false);				
+				        false,
+				        rnd.nextInt(3)+1);				
 	guns _guns = guns.superGun;
 								
 	IGuns gunsForm = new gunsDraw(_guns, DopColor); ;
-				
 				switch (rnd.nextInt() % 3)
 				{
 				case 1:
@@ -119,12 +126,11 @@ public class FormBase {
 		JPanel panel_Exit = new ExitPanel();
 		panel_Exit.setBounds(751, 367, 205, 158);
 		frame.getContentPane().add(panel_Exit);		
-		
 		JButton button_TakeCar = new JButton("\u0437\u0430\u0431\u0440\u0430\u0442\u044C");
 		button_TakeCar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
 				deleted_machine.add(transport);					
-				transport = parking.parkingStages.get(index).sub(Integer.valueOf(textField.getText()));			
+				transport = parking.parkingStages.get(index).sub(Integer.valueOf(textField.getText()));				
 				transport.SetPosition(40, 10, ExitPanel.WIDTH, ExitPanel.HEIGHT);
 				 ((ExitPanel) panel_Exit).addTransport(transport);	
 			}
@@ -158,7 +164,7 @@ public class FormBase {
 		frame.getContentPane().add(Button_Del);
 		list_box_levels.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {	
 				 if (list_box_levels.getSelectedIndex() != -1) {
 					index = list_box_levels.getSelectedIndex();	
 					pictureBoxBig.get_index(index);
@@ -167,6 +173,15 @@ public class FormBase {
 			}
 		});		
 		list_box_levels.setBounds(773, 559, 189, 126);
-		frame.getContentPane().add(list_box_levels);		
+		frame.getContentPane().add(list_box_levels);
+		
+		JButton btnAdd = new JButton("add");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FormWarConfig config = new FormWarConfig(new Delegate());
+			}
+		});
+		btnAdd.setBounds(749, 256, 89, 23);
+		frame.getContentPane().add(btnAdd);
 	}
 }
