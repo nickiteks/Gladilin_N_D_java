@@ -9,4 +9,6 @@ public interface ITransport {
 	 void MoveTransport(Direction direction);
 	
 	 void DrawTransport(Graphics g);
+
+	String ToString();
 }

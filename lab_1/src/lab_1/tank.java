@@ -3,6 +3,7 @@ package lab_1;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
+import javax.swing.Spring;
 
 public class tank extends WarCar  {
 	static Random random= new Random();
@@ -42,6 +43,29 @@ public class tank extends WarCar  {
 		thirdGun = backSpoiler;
 		this.typeGun =typeGun;
 	}
+	
+
+	public tank(String string) {
+			super(string);
+			String[] strs = string.split(";");		
+			if (strs.length == 8) {
+				MaxSpeed = Integer.parseInt(strs[0]);
+				Weight = Float.parseFloat(strs[1]);
+				MainColor = new Color(Integer.parseInt(strs[2]));
+				this.guns = guns.superGun;
+				DopColor = new Color(Integer.parseInt(strs[3]));
+				firstGun = Boolean.parseBoolean(strs[4]);
+				secondGun = Boolean.parseBoolean(strs[5]);
+				thirdGun = Boolean.parseBoolean(strs[6]);
+				typeGun = Integer.parseInt(strs[7]);
+			}
+		}
+
+	@Override
+	public String ToString() {
+		return super.ToString() +  DopColor.getRGB() + ";" + firstGun + ";" + secondGun + ";" +  thirdGun + ";" + typeGun + ";";
+	}
+	
 	public  void DrawTransport(Graphics g)
 	{
 		if (firstGun)
