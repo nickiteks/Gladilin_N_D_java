@@ -23,3 +23,4 @@ public void setTransport(ITransport transport)
 		repaint();
 	}
 }
+
