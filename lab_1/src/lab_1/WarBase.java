@@ -113,7 +113,7 @@ public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 	    		if(type==0) 
 		    	{		    		
 		    		_transport = new WarCar(rnd.nextInt(20)+100, rnd.nextInt(1000)+1000, mainColor);    		
-		    	}	    			    	
+		    	} 			    	
 		    	if(type==1) 
 		    	{
 		    		_transport = new tank(rnd.nextInt(20)+100,
@@ -123,7 +123,7 @@ public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 							dopColor,
 					        false, 
 					        false, 
-					        false);		    		
+					        false,rnd.nextInt(3)+1);		    		
 		    	}
 	    			add((T) _transport);		
 	        }

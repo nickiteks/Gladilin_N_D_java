@@ -6,7 +6,6 @@ import java.util.Random;
 
 public class tank extends WarCar  {
 	static Random random= new Random();
-	
 	public Color DopColor ;
 
 	public boolean firstGun ;
@@ -19,16 +18,17 @@ public class tank extends WarCar  {
 	
 	Random rnd =new Random();
 	
-	private int typeGun = rnd.nextInt(3)+1;
+	private int typeGun = 1;
 
 	public tank(int maxSpeed,
 			guns guns, 
-			float weight, 
+			float weight,
 			Color mainColor, 
 			Color dopColor,
 			boolean frontSpoiler, 
 			boolean sideSpoiler, 
-			boolean backSpoiler)
+			boolean backSpoiler,
+			int typeGun)
 	{
 		super(
 		maxSpeed,
@@ -40,10 +40,10 @@ public class tank extends WarCar  {
 		firstGun = frontSpoiler;
 		secondGun = sideSpoiler;
 		thirdGun = backSpoiler;
-	}	
+		this.typeGun =typeGun;
+	}
 	public  void DrawTransport(Graphics g)
 	{
-		
 		if (firstGun)
 		{
 			g.setColor(DopColor);
@@ -74,8 +74,8 @@ public class tank extends WarCar  {
 			break;
 		case 3:
 			new LargeGuns(guns, DopColor).draw(g, _startPosX, _startPosY);
-			break;			
-		}
+			break;		
+		}		
 		g.setColor(MainColor);
 		g.drawRect(_startPosX + 10, _startPosY - 5, 20, 10);
 		g.fillRect( _startPosX + 10, _startPosY - 5, 20, 10);
@@ -84,7 +84,6 @@ public class tank extends WarCar  {
 		g.fillOval( _startPosX, _startPosY, 52, 31);	
 		g.setColor(Color.black);
 		g.drawRect(_startPosX + 10, _startPosY + 10, 25, 10);
-		g.drawRect( 0, 0, 826, 338);
 		super.DrawTransport(g);
 	}
 }
