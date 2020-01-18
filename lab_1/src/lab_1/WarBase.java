@@ -129,7 +129,7 @@ public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 	        }
 	    	return -1;
 		}
-	    
+
 	    public  void   del (int num) 
 	    {
 	    	 int score=0; 	    
@@ -178,4 +178,15 @@ public class WarBase <T extends Object&ITransport , W extends Object&IGuns> {
 	            g.drawLine(i * _placeSizeWidth, 0, i * _placeSizeWidth, 700);
 	        }
 	    }	
-}
+		public ITransport getTransport(int index) {
+			if (!CheckFreePlace(index)) {
+				return _places.get(index);
+			}
+			return null;
+		}	
+		
+		public void setTransport(int index, T transport) {
+			_places.put(index, transport);
+	    	_places.get(index).SetPosition(30 + index / 5 * _placeSizeWidth + 5, index % 5 * _placeSizeHeight + 15, PictureWidth, PictureHeight);	
+		}
+}	    

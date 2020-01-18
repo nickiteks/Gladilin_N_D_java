@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
+import javax.swing.JFileChooser;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -15,9 +16,15 @@ import java.util.Map;
 import java.util.Random;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JList;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JMenu;
 
 public class FormBase {
 
@@ -30,7 +37,7 @@ public class FormBase {
 	private int index;
 	ArrayList deleted_machine = new ArrayList();
 	private static int countLevel = 5;	
-	private  String[] data = {"Óðîâåíü 1" ,"Óðîâåíü 2" ,"Óðîâåíü 3" ,"Óðîâåíü 4" ,"Óðîâåíü 5" };
+	private  String[] data = {"Ã“Ã°Ã®Ã¢Ã¥Ã­Ã¼ 1" ,"Ã“Ã°Ã®Ã¢Ã¥Ã­Ã¼ 2" ,"Ã“Ã°Ã®Ã¢Ã¥Ã­Ã¼ 3" ,"Ã“Ã°Ã®Ã¢Ã¥Ã­Ã¼ 4" ,"Ã“Ã°Ã®Ã¢Ã¥Ã­Ã¼ 5" };
 	JList list_box_levels =  new JList(data);
 	
 	class Delegate extends WarDeligate {
@@ -125,12 +132,12 @@ public class FormBase {
 		
 		JPanel panel_Exit = new ExitPanel();
 		panel_Exit.setBounds(751, 367, 205, 158);
-		frame.getContentPane().add(panel_Exit);		
+		frame.getContentPane().add(panel_Exit);				
 		JButton button_TakeCar = new JButton("\u0437\u0430\u0431\u0440\u0430\u0442\u044C");
 		button_TakeCar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
 				deleted_machine.add(transport);					
-				transport = parking.parkingStages.get(index).sub(Integer.valueOf(textField.getText()));				
+				transport = parking.parkingStages.get(index).sub(Integer.valueOf(textField.getText()));			
 				transport.SetPosition(40, 10, ExitPanel.WIDTH, ExitPanel.HEIGHT);
 				 ((ExitPanel) panel_Exit).addTransport(transport);	
 			}
@@ -183,5 +190,82 @@ public class FormBase {
 		});
 		btnAdd.setBounds(749, 256, 89, 23);
 		frame.getContentPane().add(btnAdd);
+		
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBounds(0, 0, 247, 23);
+		frame.getContentPane().add(menuBar);
+		
+		JMenu mnFile = new JMenu("file");
+		menuBar.add(mnFile);
+		
+		JMenuItem mntmSave = new JMenuItem("save");
+		mntmSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser filechooser = new JFileChooser();
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("txt", "txt");
+				filechooser.setFileFilter(filter);
+				int loc = filechooser.showDialog(null, "save");
+				if (loc == JFileChooser.APPROVE_OPTION) {
+					File file = filechooser.getSelectedFile();
+					pictureBoxBig.SaveInfo(file.getAbsolutePath() + ".txt");
+				}
+			}
+		});
+		mnFile.add(mntmSave);
+		
+		JMenuItem mntmLoad = new JMenuItem("load");
+		menuBar.add(mntmLoad);
+		mntmLoad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser filechooser = new JFileChooser();
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("txt", "txt");
+				filechooser.setFileFilter(filter);
+				int loc = filechooser.showDialog(null, "load");
+				if (loc == JFileChooser.APPROVE_OPTION) {
+					File file = filechooser.getSelectedFile();
+					pictureBoxBig.LoadInfo(file.getAbsolutePath());
+					pictureBoxBig.repaint();
+				}
+			}
+		});
+		mnFile.add(mntmLoad);
+		
+		JMenuItem mntmSaveLevel = new JMenuItem("SaveLevel");
+		mntmSaveLevel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+				JFileChooser filechooser = new JFileChooser();
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("lvl", "lvl");
+				filechooser.setFileFilter(filter);
+				int loc = filechooser.showDialog(null, "SaveLevel");
+				if (loc == JFileChooser.APPROVE_OPTION) {
+					File file = filechooser.getSelectedFile();		
+						parking.SaveLevel(file.getAbsolutePath() , index);	
+				}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		mnFile.add(mntmSaveLevel);	
+		
+		JMenuItem mntmLoadLevel = new JMenuItem("LoadLevel");
+		mntmLoadLevel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser filechooser = new JFileChooser();
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("lvl", "lvl");
+				filechooser.setFileFilter(filter);
+				int ret = filechooser.showDialog(null, "LoadLevel");                
+				if (ret == JFileChooser.APPROVE_OPTION) {
+				    File file = filechooser.getSelectedFile();
+				    try {
+						parking.LoadLevel(file.getAbsolutePath());
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
+		mnFile.add(mntmLoadLevel);	
 	}
 }

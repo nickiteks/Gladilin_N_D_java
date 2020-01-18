@@ -16,7 +16,17 @@ public class WarCar extends Vehicle {
           MainColor = mainColor;
       }
 	  
-	  public void MoveTransport(Direction direction)
+	public WarCar(String string) {
+		
+		String[] strs = string.split(";");
+		if (strs.length == 3) {
+			MaxSpeed = Integer.parseInt(strs[0]);
+			Weight = Float.parseFloat(strs[1]);
+			this.MainColor = new Color(Integer.parseInt(strs[2]));
+		}	
+	}
+
+	public void MoveTransport(Direction direction)
 		{
 			float step = MaxSpeed * 100 / Weight;
 			
@@ -62,6 +72,11 @@ public class WarCar extends Vehicle {
           g.drawRect(_startPosX + 60, _startPosY + 35, 50, 45);
           g.fillOval(_startPosX - 18, _startPosY + 70, 40, 40);
           g.fillOval(_startPosX + 55, _startPosY + 70, 40, 40);         
-          g.setColor(Color.black);		
+          g.setColor(Color.black);	 			
       }
+
+	@Override
+	public String ToString() {
+		return  MaxSpeed + ";" + Weight + ";" + MainColor.getRGB() + ";";
+	}
 }
