@@ -12,8 +12,7 @@ public WarPanel(ITransport transport)
 	this.transport=transport;		
 }
 public void setTransport(ITransport transport)
-{
-	
+{	
 	this.transport=transport;		
 }
 	
