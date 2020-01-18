@@ -43,8 +43,6 @@ public class tank extends WarCar  {
 		thirdGun = backSpoiler;
 		this.typeGun =typeGun;
 	}
-	
-
 	public tank(String string) {
 			super(string);
 			String[] strs = string.split(";");		
